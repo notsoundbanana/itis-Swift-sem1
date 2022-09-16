@@ -8,7 +8,7 @@ class Player{
     let name: String
     var hp = 100
     var attackPower = 20
-    var defencePower = 10
+    var defencePower = 0
     var playerType: playerType
     var haveSword = false
     var haveShield = false
@@ -37,21 +37,6 @@ class Player{
                 monster.hp -= monster.hp
                 print("*ВЫ НАНЕСЛИ КРИТИЧЕСКИЙ УДАР!*")
                 
-            }
-            else{
-                monster.hp -= self.attackPower
-                print("*Вы нанесли монстру \(self.attackPower) урона*")
-                print("")
-            }
-            
-        }
-        
-        else if (playerType == .mirrorer){  // Способность отражателя
-            let chance = Int.random(in: 1...10)
-        
-            if (chance <= 3){
-                print("ВЫ СМОГЛИ ОТРАЗИТЬ АТАКУ МОНСТРА")
-                print("")
             }
             else{
                 monster.hp -= self.attackPower
@@ -99,23 +84,51 @@ class Monster{
     init(type: monsterDifficulty){
         self.monsterDifficulty = type
         if (type == .easy){
-            self.hp = 20
-            self.attackPower = 5
+            self.hp = 30
+            self.attackPower = 20
         }
         else if (type == .middle){
             self.hp = 50
-            self.attackPower = 15
+            self.attackPower = 30
         }
         else{
             self.hp = 100
-            self.attackPower = 30
+            self.attackPower = 50
         }
     }
     
     func attack(player: Player){
-        player.hp -= self.attackPower
-        print("*Вам нанесли \(self.attackPower) урона*")
-        print("")
+        var mirrored = false;
+        if (player.playerType == .mirrorer){  // Способность отражателя
+            let chance = Int.random(in: 1...10)
+        
+            if (chance <= 3){
+                print("ВЫ СМОГЛИ ОТРАЗИТЬ АТАКУ МОНСТРА")
+                print("")
+                mirrored = true
+            }
+        }
+        if (!mirrored){
+            if (monsterDifficulty == .hard){
+                let chance = Int.random(in: 1...10)
+                if (chance <= 3){  // Способность сложного монстра нанести сильный удар
+                    player.hp -= self.attackPower + 15 - player.defencePower
+                    print("Монстр нанес вам сильный удар")
+                    print("*Монстр нанес \(self.attackPower + 15) урона*")
+                    print("")
+                }
+                else{
+                    player.hp -= self.attackPower - player.defencePower
+                    print("*Монстр нанес \(self.attackPower) урона*")
+                    print("")
+                }
+            }
+            else{
+                player.hp -= self.attackPower - player.defencePower
+                print("*Монстр нанес \(self.attackPower) урона*")
+                print("")
+            }
+        }
     }
 }
 
@@ -166,14 +179,14 @@ while (player.hp > 0 && monsterNum != 0){
     if (chance == 1 && player.haveSword == false){
         print("Вы нашли мечь, сила удара увеличилась")
         player.haveSword = true
-        player.attackPower += 30
+        player.attackPower += 20
         sleep(sleepTime)
     }
     
     if (chance == 2 && player.haveShield == false){
         print("Вы нашли щит, количество получаемого урона уменьшится")
         player.haveShield = true
-        player.defencePower += 30
+        player.defencePower += 20
         sleep(sleepTime)
     }
     
@@ -186,11 +199,11 @@ while (player.hp > 0 && monsterNum != 0){
         let type: String
         sleep(sleepTime)
         
-        if (monsterDifficulty <= 50){
+        if (monsterDifficulty <= 20){
             monster = Monster(type: .easy)
             type = "Легкий"
         }
-        else if (50 < monsterDifficulty && monsterDifficulty <= 80){
+        else if (20 < monsterDifficulty && monsterDifficulty <= 70){
             monster = Monster(type: .middle)
             type = "Средний"
         }
@@ -200,6 +213,7 @@ while (player.hp > 0 && monsterNum != 0){
         }
         print("Перед вами \(type) монстр")
         print("")
+        sleep(sleepTime)
         printStatistics(player: player, monster: monster)
         sleep(sleepTime)
         
@@ -237,6 +251,8 @@ while (player.hp > 0 && monsterNum != 0){
             if (player.playerType == .healer && player.hp <= 30){  // Способность лекаря
                 player.hp += 20
                 print("*Вы восстановили 20 единиц здоровья*")
+                print("")
+                sleep(sleepTime)
             }
             
             printStatistics(player: player, monster: monster)
@@ -256,6 +272,3 @@ if (player.hp <= 0){
 else if (monsterNum == 0){
     print("ВЫ ВЫИГРАЛИ!")
 }
-
-
-// !TODO Сделать способность у монстров
