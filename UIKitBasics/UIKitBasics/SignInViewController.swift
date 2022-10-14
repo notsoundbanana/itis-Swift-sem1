@@ -2,12 +2,17 @@ import UIKit
 
 class SignInViewController: UIViewController {
 
-    private let LOGIN = "asdfaskdjflkasjkdfjaskldfjklasjdfklajsldfkjsakdfj"
+    private let LOGIN = "admin"
     private let PASSWORD = "admin"
 
     @IBOutlet var usernameTextField: UITextField!
     @IBOutlet var passwordTextField: UITextField!
     @IBOutlet var signInButton: UIButton!
+    
+    override func viewWillAppear(_ animated: Bool) {
+        usernameTextField.text = ""
+        passwordTextField.text = ""
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +41,7 @@ class SignInViewController: UIViewController {
             profileVC.username = usernameTextField.text!
 
             mainTabBarController.modalPresentationStyle = .fullScreen
-
+            
             present(mainTabBarController, animated: true, completion: nil)
         }
     }

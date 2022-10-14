@@ -14,10 +14,7 @@ class ProfileViewController: UIViewController {
     }
     
     @IBAction func signOutButtonDidTap(_ sender: Any) {
-        guard let signInVC = storyboard?.instantiateViewController(withIdentifier: "SignInViewController") as? SignInViewController else { return }
-        signInVC.modalPresentationStyle = .fullScreen
-    
-        present(signInVC, animated: true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     private func setConstraints() {
