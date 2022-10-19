@@ -4,6 +4,7 @@ class HomeViewController: UIViewController {
 
     @IBOutlet var greetingLabel: UILabel!
     var username: String = ""
+
     @IBOutlet var browseCatalogButton: UIButton!
     @IBOutlet var animalImagesButton: UIButton!
     

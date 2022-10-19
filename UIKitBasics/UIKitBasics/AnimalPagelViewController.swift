@@ -8,7 +8,6 @@ class AnimalPagelViewController: UIViewController {
         super.viewDidLoad()
         animelUIImageView.image = UIImage(named: String(Int.random(in: 1...3)))
         setConstraints()
-        
     }
     
     @IBAction func closeButtonDidTap(_ sender: Any) {

@@ -14,7 +14,7 @@ class ProfileViewController: UIViewController {
     }
     
     @IBAction func signOutButtonDidTap(_ sender: Any) {
-        self.dismiss(animated: true, completion: nil)
+        presentingViewController?.dismiss(animated: true, completion: nil)
     }
     
     private func setConstraints() {
