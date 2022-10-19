@@ -1,3 +1,10 @@
+//
+//  SceneDelegate.swift
+//  AutoLayout
+//
+//  Created by Teacher on 08.10.2022.
+//
+
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {

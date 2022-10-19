@@ -138,6 +138,7 @@
                     <navigationItem key="navigationItem" id="ZSh-BC-XZD"/>
                     <connections>
                         <outlet property="greetingLabel" destination="IbE-en-qWH" id="wie-tI-xW9"/>
+                        <outlet property="signOutButton" destination="Kof-00-ldF" id="XXG-hK-uZ1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bXE-7A-MFz" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -200,6 +201,8 @@
                     </view>
                     <navigationItem key="navigationItem" id="RPw-Os-sfH"/>
                     <connections>
+                        <outlet property="animalImagesButton" destination="Hmp-iE-pvq" id="DpW-o8-aEg"/>
+                        <outlet property="browseCatalogButton" destination="YK4-lp-68w" id="Cft-OD-LPq"/>
                         <outlet property="greetingLabel" destination="pAO-LD-mpR" id="4fH-go-CPz"/>
                     </connections>
                 </viewController>
@@ -237,6 +240,7 @@
                         <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
                     </view>
                     <connections>
+                        <outlet property="browseCatalogButton" destination="V9i-BJ-jeQ" id="pCt-pj-KLQ"/>
                         <outlet property="pageNumberLabel" destination="2fR-qr-sf1" id="gc4-eJ-lO6"/>
                     </connections>
                 </viewController>
