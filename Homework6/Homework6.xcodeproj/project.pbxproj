@@ -2,6 +2,7 @@
 {
 	archiveVersion = 1;
 	classes = {
+	};
 	objectVersion = 56;
 	objects = {
 
@@ -11,6 +12,9 @@
 		FF38A3F729006D5300E9A416 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF38A3F629006D5300E9A416 /* Assets.xcassets */; };
 		FF38A3FA29006D5300E9A416 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF38A3F829006D5300E9A416 /* LaunchScreen.storyboard */; };
 		FF38A40329007CE100E9A416 /* Phone.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF38A40229007CE100E9A416 /* Phone.swift */; };
+		FF38A4072900836200E9A416 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF38A4062900836200E9A416 /* TableViewController.swift */; };
+		FF38A4092900873600E9A416 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF38A4082900873600E9A416 /* TableViewCell.swift */; };
+		FF38A40C29008CA600E9A416 /* GenerateData.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF38A40B29008CA600E9A416 /* GenerateData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +25,9 @@
 		FF38A3F929006D5300E9A416 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FF38A3FB29006D5300E9A416 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FF38A40229007CE100E9A416 /* Phone.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Phone.swift; sourceTree = "<group>"; };
+		FF38A4062900836200E9A416 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
+		FF38A4082900873600E9A416 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
+		FF38A40B29008CA600E9A416 /* GenerateData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,6 +60,7 @@
 		FF38A3EC29006D5300E9A416 /* Homework6 */ = {
 			isa = PBXGroup;
 			children = (
+				FF38A40A29008C9000E9A416 /* Services */,
 				FF38A405290080AC00E9A416 /* ViewControllers */,
 				FF38A40129007C3D00E9A416 /* Models */,
 				FF38A3ED29006D5300E9A416 /* AppDelegate.swift */,
@@ -75,8 +83,18 @@
 		FF38A405290080AC00E9A416 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				FF38A4062900836200E9A416 /* TableViewController.swift */,
+				FF38A4082900873600E9A416 /* TableViewCell.swift */,
 			);
 			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		FF38A40A29008C9000E9A416 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				FF38A40B29008CA600E9A416 /* GenerateData.swift */,
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -149,9 +167,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FF38A4092900873600E9A416 /* TableViewCell.swift in Sources */,
 				FF38A40329007CE100E9A416 /* Phone.swift in Sources */,
 				FF38A3EE29006D5300E9A416 /* AppDelegate.swift in Sources */,
 				FF38A3F029006D5300E9A416 /* SceneDelegate.swift in Sources */,
+				FF38A40C29008CA600E9A416 /* GenerateData.swift in Sources */,
+				FF38A4072900836200E9A416 /* TableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
