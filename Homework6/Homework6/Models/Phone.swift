@@ -19,6 +19,11 @@ struct Phone {
     }
 
     public func printInfo() {
-        print("PHONE INFO")
+        print("""
+              Name: \(name)
+              Colors: \(colors)
+              Storage: \(storage)
+              Price: \(price)
+            """)
     }
 }

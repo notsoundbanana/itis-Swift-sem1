@@ -15,7 +15,6 @@
 		FF38A4072900836200E9A416 /* TableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF38A4062900836200E9A416 /* TableViewController.swift */; };
 		FF38A4092900873600E9A416 /* TableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF38A4082900873600E9A416 /* TableViewCell.swift */; };
 		FF38A40C29008CA600E9A416 /* Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF38A40B29008CA600E9A416 /* Data.swift */; };
-		FF38A40E29020BB100E9A416 /* MyCustomHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF38A40D29020BB100E9A416 /* MyCustomHeader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,7 +28,6 @@
 		FF38A4062900836200E9A416 /* TableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewController.swift; sourceTree = "<group>"; };
 		FF38A4082900873600E9A416 /* TableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCell.swift; sourceTree = "<group>"; };
 		FF38A40B29008CA600E9A416 /* Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Data.swift; sourceTree = "<group>"; };
-		FF38A40D29020BB100E9A416 /* MyCustomHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCustomHeader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,7 +68,6 @@
 				FF38A3F629006D5300E9A416 /* Assets.xcassets */,
 				FF38A3F829006D5300E9A416 /* LaunchScreen.storyboard */,
 				FF38A3FB29006D5300E9A416 /* Info.plist */,
-				FF38A40D29020BB100E9A416 /* MyCustomHeader.swift */,
 			);
 			path = Homework6;
 			sourceTree = "<group>";
@@ -172,7 +169,6 @@
 			files = (
 				FF38A4092900873600E9A416 /* TableViewCell.swift in Sources */,
 				FF38A40329007CE100E9A416 /* Phone.swift in Sources */,
-				FF38A40E29020BB100E9A416 /* MyCustomHeader.swift in Sources */,
 				FF38A3EE29006D5300E9A416 /* AppDelegate.swift in Sources */,
 				FF38A3F029006D5300E9A416 /* SceneDelegate.swift in Sources */,
 				FF38A40C29008CA600E9A416 /* Data.swift in Sources */,

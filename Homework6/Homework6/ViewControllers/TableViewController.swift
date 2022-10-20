@@ -8,21 +8,21 @@
 import UIKit
 
 class TableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
-    
+
+    private let tableView: UITableView = .init(frame: .zero, style: .insetGrouped)
+    private var supportedPhones: [Phone] = Data.getSupportedPhonesData()
+    private var allPhones: [Phone] = Data.getAllPhonesData()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
     }
 
-    private let tableView: UITableView = .init(frame: .zero, style: .insetGrouped)
-
-    
     private func setup() {
         view.backgroundColor = .white
         view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         view.backgroundColor = .systemGray3
-        
         
         NSLayoutConstraint.activate([
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -49,11 +49,6 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
     func numberOfSections(in tableView: UITableView) -> Int {
         return 2
     }
-
-
-    private var supportedPhones: [Phone] = Data.getSupportedPhonesData()
-    private var allPhones: [Phone] = Data.getAllPhonesData()
-
     
     enum CellIdentifier: String {
         case supportedPhone
@@ -63,10 +58,6 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
     func tableView( _ tableView: UITableView, cellForRowAt indexPath: IndexPath ) -> UITableViewCell {
         if indexPath.section == 0 {
             let phone = supportedPhones[indexPath.row]
-//            guard let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.supportedPhone.rawValue)
-//            else {
-//                fatalError("Could not deque cell of type \(UITableViewCell.self)")
-//            }
 
             let cell = UITableViewCell(style: .value1, reuseIdentifier: CellIdentifier.supportedPhone.rawValue)
 
@@ -106,6 +97,13 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
 
     func tableView( _ tableView: UITableView, heightForRowAt indexPath: IndexPath ) -> CGFloat {
         UITableView.automaticDimension
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if (indexPath.section == 1) {
+            tableView.deselectRow(at: indexPath, animated: true)
+            allPhones[indexPath.row].printInfo()
+        }
     }
 }
 
