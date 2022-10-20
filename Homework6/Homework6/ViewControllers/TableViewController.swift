@@ -11,17 +11,19 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         setup()
     }
 
-    private let tableView: UITableView = .init()
+    private let tableView: UITableView = .init(frame: .zero, style: .insetGrouped)
 
+    
     private func setup() {
         view.backgroundColor = .white
         view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
-
+        view.backgroundColor = .systemGray3
+        
+        
         NSLayoutConstraint.activate([
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
@@ -29,50 +31,81 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
         
-        let generateData = GenerateData()
-
-        phones = generateData.getData()
+        tableView.register(
+            TableViewCell.self,
+            forCellReuseIdentifier: CellIdentifier.supportedPhone.rawValue
+        )
 
         tableView.register(
             TableViewCell.self,
             forCellReuseIdentifier: CellIdentifier.phone.rawValue
         )
+
         tableView.dataSource = self
         tableView.delegate = self
-        tableView.separatorInset = .init(top: 0, left: 20, bottom: 0, right: 20)
         tableView.reloadData()
     }
-
-    // MARK: - UITableViewDataSource
-
-    private var phones: [Phone] = []
-
-    func tableView( _ tableView: UITableView, numberOfRowsInSection section: Int ) -> Int {
-        phones.count
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
     }
 
+
+    private var supportedPhones: [Phone] = Data.getSupportedPhonesData()
+    private var allPhones: [Phone] = Data.getAllPhonesData()
+
+    
     enum CellIdentifier: String {
+        case supportedPhone
         case phone
-        case text
     }
 
-    func tableView(
-        _ tableView: UITableView,
-        cellForRowAt indexPath: IndexPath
-    ) -> UITableViewCell {
-        guard
-            let cell = tableView
-                .dequeueReusableCell(
-                    withIdentifier: CellIdentifier.phone.rawValue, for: indexPath
-                )
-                as? TableViewCell
-        else {
-            fatalError("Could not deque cell of type \(TableViewCell.self)")
+    func tableView( _ tableView: UITableView, cellForRowAt indexPath: IndexPath ) -> UITableViewCell {
+        if indexPath.section == 0 {
+            let phone = supportedPhones[indexPath.row]
+//            guard let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.supportedPhone.rawValue)
+//            else {
+//                fatalError("Could not deque cell of type \(UITableViewCell.self)")
+//            }
+
+            let cell = UITableViewCell(style: .value1, reuseIdentifier: CellIdentifier.supportedPhone.rawValue)
+
+            var configuration = UIListContentConfiguration.valueCell()
+            configuration.text = phone.name
+
+            cell.contentConfiguration = configuration
+            cell.selectionStyle = .none
+
+            return cell
         }
 
-        let phone = phones[indexPath.row]
-        cell.set(phone: phone)
-        return cell
+        else {
+            guard let cell = tableView.dequeueReusableCell( withIdentifier: CellIdentifier.phone.rawValue, for: indexPath) as? TableViewCell
+            else {
+                fatalError("Could not deque cell of type \(TableViewCell.self)")
+            }
+
+            let phone = allPhones[indexPath.row]
+            cell.set(phone: phone)
+            return cell
+        }
+    }
+
+    func tableView( _ tableView: UITableView, numberOfRowsInSection section: Int ) -> Int {
+        section == 0 ? supportedPhones.count : allPhones.count
+    }
+
+    func tableView( _ tableView: UITableView, viewForHeaderInSection section: Int ) -> UIView? {
+        let stackView = UIStackView()
+        let label = UILabel()
+        label.text = section == 0 ? "Supported:" : "All:"
+        label.font = .boldSystemFont(ofSize: 30)
+        stackView.addArrangedSubview(label)
+        return stackView
+    }
+
+    func tableView( _ tableView: UITableView, heightForRowAt indexPath: IndexPath ) -> CGFloat {
+        UITableView.automaticDimension
     }
 }
 

@@ -34,14 +34,9 @@ class TableViewCell: UITableViewCell {
     }
 
     private func setup() {
-//        nameLabel.font = .boldSystemFont(ofSize: 20)
-//        ageLabel.font = .monospacedDigitSystemFont(ofSize: 17, weight: .regular)
-//        let limbsLabel = UILabel()
-//        limbsLabel.text = "# of limbs:"
-//        let limbsStackView = UIStackView(
-//            arrangedSubviews: [ limbsLabel, limbsNumberImageView ]
-//        )
-//        limbsStackView.spacing = 10
+        nameLabel.font = .boldSystemFont(ofSize: 20)
+        pricesLabel.font = .boldSystemFont(ofSize: 17)
+        
         let stackView = UIStackView(arrangedSubviews: [
             nameLabel, colorsLabel, storagesLabel, pricesLabel
         ])
@@ -50,15 +45,12 @@ class TableViewCell: UITableViewCell {
 
         contentView.addSubview(stackView)
         stackView.translatesAutoresizingMaskIntoConstraints = false
-//        limbsNumberImageView.translatesAutoresizingMaskIntoConstraints = false
 
         NSLayoutConstraint.activate([
             stackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             stackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             stackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 12),
             stackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -12),
-//            limbsNumberImageView.widthAnchor.constraint(equalToConstant: 30),
-//            limbsNumberImageView.heightAnchor.constraint(equalToConstant: 30),
         ])
     }
 }

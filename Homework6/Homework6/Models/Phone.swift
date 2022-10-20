@@ -5,7 +5,7 @@
 //  Created by Daniil Chemaev on 19.10.2022.
 //
 
-class Phone {
+struct Phone {
     var name: String
     var colors: String
     var storage: String
@@ -16,5 +16,9 @@ class Phone {
         self.colors = colors
         self.storage = storage
         self.price = price
+    }
+
+    public func printInfo() {
+        print("PHONE INFO")
     }
 }
