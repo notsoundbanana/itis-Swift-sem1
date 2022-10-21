@@ -64,12 +64,19 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
             var configuration = UIListContentConfiguration.valueCell()
             configuration.text = phone.name
 
+            if (phone.name.contains("Max") || phone.name.contains("Plus")) {
+                configuration.secondaryText = "For big dudes only"
+                configuration.secondaryTextProperties.color = .lightGray
+            }
+
+            configuration.image = UIImage(named: phone.name)
+            configuration.imageProperties.maximumSize = CGSize(width: 70, height: 70)
             cell.contentConfiguration = configuration
             cell.selectionStyle = .none
 
             return cell
         }
-
+        
         else {
             guard let cell = tableView.dequeueReusableCell( withIdentifier: CellIdentifier.phone.rawValue, for: indexPath) as? TableViewCell
             else {
