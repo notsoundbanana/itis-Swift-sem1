@@ -19,15 +19,14 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
 
     private func setup() {
-        view.backgroundColor = .white
         view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = .systemGray3
+        view.backgroundColor = .systemGray6
         
         NSLayoutConstraint.activate([
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
         ])
         
@@ -102,15 +101,15 @@ class TableViewController: UIViewController, UITableViewDataSource, UITableViewD
         return stackView
     }
 
-    func tableView( _ tableView: UITableView, heightForRowAt indexPath: IndexPath ) -> CGFloat {
-        UITableView.automaticDimension
-    }
-
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if (indexPath.section == 1) {
             tableView.deselectRow(at: indexPath, animated: true)
             allPhones[indexPath.row].printInfo()
         }
+    }
+
+    func tableView( _ tableView: UITableView, heightForRowAt indexPath: IndexPath ) -> CGFloat {
+        UITableView.automaticDimension
     }
 }
 
