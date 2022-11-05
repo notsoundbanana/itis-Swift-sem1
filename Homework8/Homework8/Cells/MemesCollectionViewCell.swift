@@ -9,9 +9,11 @@ import UIKit
 
 class MemesCollectionViewCell: UICollectionViewCell {
 
+    private var dataTask: URLSessionDataTask?
+
     private let memeImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
     }()
@@ -20,16 +22,15 @@ class MemesCollectionViewCell: UICollectionViewCell {
     private let backgroundTitleView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
-        view.alpha = 0.6
+        view.alpha = 0.1
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
 
     private let memeLabel: UILabel = {
         let label = UILabel()
-        label.text = "Memes"
         label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.font = UIFont.boldSystemFont(ofSize: 20)
         label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -43,13 +44,14 @@ class MemesCollectionViewCell: UICollectionViewCell {
     }
 
     required init?(coder: NSCoder) {
-        fatalError("init(coder: ) has not been implemented")
+        super.init(coder: coder)
+
+        setupView()
+        setConstraints()
     }
 
     func setupView(){
         clipsToBounds = true
-//        backgroundColor = .white
-
 
         addSubview(memeImageView)
         addSubview(backgroundTitleView)
@@ -57,25 +59,49 @@ class MemesCollectionViewCell: UICollectionViewCell {
     }
 
     func configureCell(memeName: String, imageName: String){
+        loadImage(url: URL(string: imageName)!)
         memeLabel.text = memeName
-        memeImageView.image = UIImage(named: imageName)
+        memeImageView.contentMode = .scaleToFill
     }
+
+    private func loadImage(url: URL) {
+        memeImageView.image = nil
+        dataTask?.cancel()
+        let urlRequest = URLRequest(
+           url: url,
+           cachePolicy: .reloadIgnoringLocalAndRemoteCacheData
+        )
+        dataTask = URLSession.shared
+           .dataTask(with: urlRequest) { [memeImageView] data, _, _ in
+               guard let data else {
+                   return
+               }
+
+               let image = UIImage(data: data)
+               DispatchQueue.main.async { [memeImageView] in
+                   guard let image else { return }
+                   memeImageView.image = image
+               }
+           }
+        dataTask?.resume()
+        }
+
 
     func setConstraints(){
         NSLayoutConstraint.activate([
 
-            memeImageView.topAnchor.constraint(equalTo: topAnchor, constant: 0),
-            memeImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0),
-            memeImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
-            memeImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
+            memeImageView.topAnchor.constraint(equalTo: topAnchor, constant: 5),
+            memeImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5),
+            memeImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
+            memeImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5),
 
-            backgroundTitleView.topAnchor.constraint(equalTo: topAnchor, constant: 0),
-            backgroundTitleView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0),
-            backgroundTitleView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 0),
-            backgroundTitleView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: 0),
+            backgroundTitleView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 200),
+            backgroundTitleView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
+            backgroundTitleView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5),
+            backgroundTitleView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5),
 
-            memeLabel.centerYAnchor.constraint(equalTo: backgroundTitleView.centerYAnchor),
-            memeLabel.leadingAnchor.constraint(equalTo: backgroundTitleView.leadingAnchor, constant: 10)
+            memeLabel.centerYAnchor.constraint(equalTo: backgroundTitleView.centerYAnchor, constant: 0),
+            memeLabel.leadingAnchor.constraint(equalTo: backgroundTitleView.leadingAnchor, constant: 12)
         ])
     }
 }

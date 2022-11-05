@@ -12,7 +12,7 @@ class ViewController: UIViewController {
     private let collectionView: UICollectionView = {
         let collectionViewLayout = UICollectionViewLayout()
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout)
-        collectionView.backgroundColor = .none
+        collectionView.backgroundColor = .systemGray6
         collectionView.bounces = false
         collectionView.translatesAutoresizingMaskIntoConstraints = false
         return collectionView
@@ -29,8 +29,8 @@ class ViewController: UIViewController {
     private let sections = MockData.shared.pageData
 
     private func setupViews() {
-        view.backgroundColor = .white
-        title = "Memes"
+        view.backgroundColor = .systemGray6
+        title = "My Memes"
 
         view.addSubview(collectionView)
         collectionView.register(FavouriteMemesCollectionViewCell.self, forCellWithReuseIdentifier: "FavouriteMemesCollectionViewCell")
@@ -63,55 +63,57 @@ extension ViewController {
         }
     }
 
-    private func createLayoutSection(group: NSCollectionLayoutGroup,
-                                     behaviour: UICollectionLayoutSectionOrthogonalScrollingBehavior,
-                                     interGroupSpacing: CGFloat,
-                                     supplementaryItems: [NSCollectionLayoutBoundarySupplementaryItem],
-                                     contentInsets: Bool) -> NSCollectionLayoutSection {
-        let section = NSCollectionLayoutSection(group: group)
-        section.orthogonalScrollingBehavior = behaviour
-        section.boundarySupplementaryItems = supplementaryItems
-        section.supplementariesFollowContentInsets = contentInsets
-        return section
-    }
-
     private func createFavouriteMemesSection() -> NSCollectionLayoutSection {
-        let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(0.5),
-                                                            heightDimension: .fractionalHeight(1)))
+        let item = NSCollectionLayoutItem(
+            layoutSize: NSCollectionLayoutSize(
+                widthDimension: .fractionalWidth(1),
+                heightDimension: .fractionalHeight(1)
+            )
+        )
+        let group = NSCollectionLayoutGroup.vertical(
+            layoutSize: NSCollectionLayoutSize(
+                widthDimension: .fractionalWidth(0.5),
+                heightDimension: .absolute(320)
+            ),
+            repeatingSubitem: item, count: 1
+        )
 
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: .init(widthDimension: .fractionalWidth(0.9),
-                                                                         heightDimension: .fractionalHeight(0.2)),
-                                                       subitems: [item])
+        let section = NSCollectionLayoutSection(
+            group: group
+        )
+        section.orthogonalScrollingBehavior = .groupPaging
 
-        let section = createLayoutSection(group: group,
-                                          behaviour: .groupPaging,
-                                          interGroupSpacing: 5,
-                                          supplementaryItems: [],
-                                          contentInsets: false)
-        section.contentInsets = .init(top: 0, leading: 5, bottom: 0, trailing: 0)
+        section.boundarySupplementaryItems = [supplementaryHeaderItem()]
+
         return section
     }
 
     private func createMemesSection() -> NSCollectionLayoutSection {
-        let item = NSCollectionLayoutItem(layoutSize: .init(widthDimension: .fractionalWidth(1),
-                                                            heightDimension: .fractionalHeight(1)))
+        let item = NSCollectionLayoutItem(
+            layoutSize: NSCollectionLayoutSize(
+                widthDimension: .fractionalWidth(1),
+                heightDimension: .fractionalHeight(1)
+            )
+        )
+        let group = NSCollectionLayoutGroup.horizontal(
+            layoutSize: NSCollectionLayoutSize(
+                    widthDimension: .fractionalWidth(1),
+                    heightDimension: .absolute(240)
+            ),
+            repeatingSubitem: item, count: 1
+        )
+        let section = NSCollectionLayoutSection(
+                group: group
+        )
 
-        let group = NSCollectionLayoutGroup.vertical(layoutSize: .init(widthDimension: .fractionalWidth(1),
-                                                                       heightDimension: .fractionalHeight(0.3)),
-                                                       subitems: [item])
-
-        let section = createLayoutSection(group: group,
-                                          behaviour: .continuous,
-                                          interGroupSpacing: 10,
-                                          supplementaryItems: [supplementaryHeaderItem()],
-                                          contentInsets: true)
-        section.contentInsets = .init(top: 0, leading: 10, bottom: 0, trailing: 10)
+        section.boundarySupplementaryItems = [supplementaryHeaderItem()]
+        
         return section
     }
 
     private func supplementaryHeaderItem() -> NSCollectionLayoutBoundarySupplementaryItem {
         .init(layoutSize: .init(widthDimension: .fractionalWidth(1),
-                                heightDimension: .fractionalWidth(0.05)),
+                                heightDimension: .fractionalWidth(0.1)),
               elementKind: UICollectionView.elementKindSectionHeader,
               alignment: .top)
     }

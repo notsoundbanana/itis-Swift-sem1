@@ -10,6 +10,8 @@ import UIKit
 
 class FavouriteMemesCollectionViewCell: UICollectionViewCell {
 
+    private var dataTask: URLSessionDataTask?
+
     private let favouriteMemeImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFit
@@ -25,24 +27,50 @@ class FavouriteMemesCollectionViewCell: UICollectionViewCell {
     }
 
     required init?(coder: NSCoder) {
-        fatalError("init(coder: ) has not been implemented")
+        super.init(coder: coder)
+
+        setupView()
+        setConstraints()
     }
 
     func setupView(){
-        backgroundColor = .white
+        backgroundColor = .none
         addSubview(favouriteMemeImageView)
     }
 
     func configureCell(imageName: String){
-        favouriteMemeImageView.image = UIImage(named: imageName)
+        loadImage(url: URL(string: imageName)!)
+        favouriteMemeImageView.contentMode = .scaleToFill
     }
+
+    private func loadImage(url: URL) {
+        favouriteMemeImageView.image = nil
+        dataTask?.cancel()
+        let urlRequest = URLRequest(
+           url: url,
+           cachePolicy: .reloadIgnoringLocalAndRemoteCacheData
+        )
+        dataTask = URLSession.shared
+           .dataTask(with: urlRequest) { [favouriteMemeImageView] data, _, _ in
+               guard let data else {
+                   return
+               }
+
+               let image = UIImage(data: data)
+               DispatchQueue.main.async { [favouriteMemeImageView] in
+                   guard let image else { return }
+                   favouriteMemeImageView.image = image
+               }
+           }
+        dataTask?.resume()
+        }
 
     func setConstraints(){
         NSLayoutConstraint.activate([
-            favouriteMemeImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 0),
-            favouriteMemeImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: 0),
-            favouriteMemeImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 0),
-            favouriteMemeImageView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: 0)
+            favouriteMemeImageView.topAnchor.constraint(equalTo: topAnchor, constant: 5),
+            favouriteMemeImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 0),
+            favouriteMemeImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
+            favouriteMemeImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5)
         ])
     }
 }
