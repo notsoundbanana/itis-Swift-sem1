@@ -24,22 +24,43 @@ struct MockData{
             .init(title: "", image: "https://oir.mobi/uploads/posts/2021-04/1619694355_32-oir_mobi-p-radostnii-kot-zhivotnie-krasivo-foto-35.jpg"),
             .init(title: "", image: "https://s2.best-wallpaper.net/wallpaper/iphone/1708/Funny-cat-tie_iphone_1080x1920.jpg"),
             .init(title: "", image: "https://s2.dmcdn.net/v/U5eEh1YrMPpQooRNb"),
+            .init(title: "", image: "https://st3.depositphotos.com/7863750/16111/i/600/depositphotos_161117370-stock-photo-cat-builder-3.jpg")
         ])
     }()
 
     private let memes: ListSection = {
         .memes([
-            .init(title: "SOMEBODY", image: "https://wallpaperaccess.com/full/4944181.png"),
-            .init(title: "ЪУЪ", image: "https://c4.wallpaperflare.com/wallpaper/583/668/58/memes-cat-boy-hd-wallpaper-preview.jpg"),
-            .init(title: "NOOO", image: "https://i.pinimg.com/originals/25/d5/11/25d511b9b8992ec657dd44ac65c21b51.jpg"),
-            .init(title: "Hate", image: "https://wallpapers.com/images/hd/sleepy-cat-meme-q7y1o5tfpec676ct.jpg"),
-            .init(title: "Шаурма", image: "https://c4.wallpaperflare.com/wallpaper/987/106/409/1600x1200-px-cat-funny-grumpy-wallpaper-preview.jpg"),
-            .init(title: "Cыр", image: "https://memepedia.ru/wp-content/uploads/2020/05/eyhju-xxgaetdof.jpg"),
-            .init(title: "Toilet", image: "https://avatars.mds.yandex.net/get-vthumb/2901564/4e1c347df6f5124c0f8785999da9f368/564x318_1"),
-            .init(title: "JUICE", image: "https://lifeglobe.net/x/entry/6080/1-0.jpg"),
-            .init(title: "ПОДержка", image: "https://gamerwall.pro/uploads/posts/2022-09/1662292416_1-gamerwall-pro-p-smeshnie-koshki-vkontakte-1.jpg"),
-            .init(title: "Да", image: "https://bestcube.space/wp-content/uploads/Luchshe-poprobovat-chem-ne-poprobovat.jpg"),
-            .init(title: "Кот, злой", image: "https://funart.pro/uploads/posts/2021-07/1627485035_37-funart-pro-p-zlobnii-kot-zhivotnie-krasivo-foto-48.jpg"),
+            .init(
+                title: "SOMEBODY",
+                image: "https://wallpaperaccess.com/full/4944181.png",
+                size: CGSize(width: 1920, height: 1080)
+            ),
+            .init(
+                title: "ЪУЪ",
+                image: "https://c4.wallpaperflare.com/wallpaper/583/668/58/memes-cat-boy-hd-wallpaper-preview.jpg",
+                size: CGSize(width: 728, height: 410)
+            ),
+            .init(
+                title: "NOOO",
+                image: "https://i.pinimg.com/originals/25/d5/11/25d511b9b8992ec657dd44ac65c21b51.jpg",
+                size: CGSize(width: 1689, height: 643)
+            ),
+            .init(
+                title: "Hate",
+                image: "https://wallpapers.com/images/hd/sleepy-cat-meme-q7y1o5tfpec676ct.jpg",
+                size: CGSize(width: 1143, height: 643)
+            ),
+            .init(
+                title: "Шаурма",
+                image: "https://c4.wallpaperflare.com/wallpaper/987/106/409/1600x1200-px-cat-funny-grumpy-wallpaper-preview.jpg",
+                size: CGSize(width: 1600, height: 1200)
+            ),
+//            .init(title: "Cыр", image: "https://memepedia.ru/wp-content/uploads/2020/05/eyhju-xxgaetdof.jpg"),
+//            .init(title: "Toilet", image: "https://avatars.mds.yandex.net/get-vthumb/2901564/4e1c347df6f5124c0f8785999da9f368/564x318_1"),
+//            .init(title: "JUICE", image: "https://lifeglobe.net/x/entry/6080/1-0.jpg"),
+//            .init(title: "ПОДержка", image: "https://gamerwall.pro/uploads/posts/2022-09/1662292416_1-gamerwall-pro-p-smeshnie-koshki-vkontakte-1.jpg"),
+//            .init(title: "Да", image: "https://bestcube.space/wp-content/uploads/Luchshe-poprobovat-chem-ne-poprobovat.jpg"),
+//            .init(title: "Кот, злой", image: "https://funart.pro/uploads/posts/2021-07/1627485035_37-funart-pro-p-zlobnii-kot-zhivotnie-krasivo-foto-48.jpg"),
         ])
     }()
 

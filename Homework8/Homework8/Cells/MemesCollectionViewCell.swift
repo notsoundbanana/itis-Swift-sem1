@@ -10,6 +10,10 @@ import UIKit
 class MemesCollectionViewCell: UICollectionViewCell {
 
     private var dataTask: URLSessionDataTask?
+    private var aspectRatioConstraint: NSLayoutConstraint?
+    private let imageView: UIImageView = .init()
+    private let label: UILabel = .init()
+    private var workItem: DispatchWorkItem?
 
     private let memeImageView: UIImageView = {
         let imageView = UIImageView()
@@ -18,18 +22,9 @@ class MemesCollectionViewCell: UICollectionViewCell {
         return imageView
     }()
 
-
-    private let backgroundTitleView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .white
-        view.alpha = 0.1
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-
     private let memeLabel: UILabel = {
         let label = UILabel()
-        label.textAlignment = .center
+        label.textAlignment = .left
         label.font = UIFont.boldSystemFont(ofSize: 20)
         label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -51,17 +46,20 @@ class MemesCollectionViewCell: UICollectionViewCell {
     }
 
     func setupView(){
-        clipsToBounds = true
-
+//        clipsToBounds = true
+        memeImageView.translatesAutoresizingMaskIntoConstraints = false
+        memeImageView.backgroundColor = .systemGray3
         addSubview(memeImageView)
-        addSubview(backgroundTitleView)
+
+        memeLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(memeLabel)
     }
 
-    func configureCell(memeName: String, imageName: String){
+    func configureCell(memeName: String, imageName: String, imageSize: CGSize){
         loadImage(url: URL(string: imageName)!)
+        setupRatio(imageSize: imageSize)
         memeLabel.text = memeName
-        memeImageView.contentMode = .scaleToFill
+        memeImageView.contentMode = .scaleAspectFit
     }
 
     private func loadImage(url: URL) {
@@ -89,20 +87,35 @@ class MemesCollectionViewCell: UICollectionViewCell {
 
     func setConstraints(){
         NSLayoutConstraint.activate([
-
             memeImageView.topAnchor.constraint(equalTo: topAnchor, constant: 5),
             memeImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5),
             memeImageView.leadingAnchor.constraint(equalTo: leadingAnchor, constant: 5),
             memeImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -5),
 
-            backgroundTitleView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 200),
-            backgroundTitleView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -5),
-            backgroundTitleView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 5),
-            backgroundTitleView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -5),
-
-            memeLabel.centerYAnchor.constraint(equalTo: backgroundTitleView.centerYAnchor, constant: 0),
-            memeLabel.leadingAnchor.constraint(equalTo: backgroundTitleView.leadingAnchor, constant: 12)
+            memeLabel.leadingAnchor.constraint(equalTo: memeImageView.leadingAnchor, constant: 12),
+            memeLabel.trailingAnchor.constraint(equalTo: memeImageView.trailingAnchor, constant: -12),
+            memeLabel.bottomAnchor.constraint(equalTo: memeImageView.bottomAnchor, constant: -12),
         ])
+
+        setupDefaultRatio()
+    }
+
+    private func setupDefaultRatio() {
+        aspectRatioConstraint?.isActive = false
+        aspectRatioConstraint = memeImageView.widthAnchor.constraint(
+            equalTo: memeImageView.heightAnchor, multiplier: 1
+        )
+        aspectRatioConstraint?.isActive = true
+    }
+
+    private func setupRatio(imageSize: CGSize) {
+        aspectRatioConstraint?.isActive = false
+        aspectRatioConstraint = memeImageView.widthAnchor.constraint(
+            equalTo: memeImageView.heightAnchor,
+            multiplier: imageSize.width / imageSize.height,
+            constant: -12
+        )
+        aspectRatioConstraint?.isActive = true
     }
 }
 

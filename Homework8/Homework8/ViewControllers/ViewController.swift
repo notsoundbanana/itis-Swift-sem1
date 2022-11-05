@@ -66,16 +66,16 @@ extension ViewController {
     private func createFavouriteMemesSection() -> NSCollectionLayoutSection {
         let item = NSCollectionLayoutItem(
             layoutSize: NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(1),
+                widthDimension: .absolute(view.bounds.width/2),
                 heightDimension: .fractionalHeight(1)
             )
         )
-        let group = NSCollectionLayoutGroup.vertical(
+        let group = NSCollectionLayoutGroup.horizontal(
             layoutSize: NSCollectionLayoutSize(
-                widthDimension: .fractionalWidth(0.5),
-                heightDimension: .absolute(320)
+                widthDimension: .absolute(view.bounds.width),
+                heightDimension: .fractionalHeight(0.33)
             ),
-            repeatingSubitem: item, count: 1
+            repeatingSubitem: item, count: 2
         )
 
         let section = NSCollectionLayoutSection(
@@ -92,13 +92,13 @@ extension ViewController {
         let item = NSCollectionLayoutItem(
             layoutSize: NSCollectionLayoutSize(
                 widthDimension: .fractionalWidth(1),
-                heightDimension: .fractionalHeight(1)
+                heightDimension: .estimated(100)
             )
         )
         let group = NSCollectionLayoutGroup.horizontal(
             layoutSize: NSCollectionLayoutSize(
                     widthDimension: .fractionalWidth(1),
-                    heightDimension: .absolute(240)
+                    heightDimension: .estimated(300)
             ),
             repeatingSubitem: item, count: 1
         )
@@ -153,7 +153,8 @@ extension ViewController: UICollectionViewDataSource {
             else {
                 return UICollectionViewCell()
             }
-            cell.configureCell(memeName: meme[indexPath.row].title, imageName: meme[indexPath.row].image)
+//            cell.set(meme[indexPath.row % 4].size)
+            cell.configureCell(memeName: meme[indexPath.row].title, imageName: meme[indexPath.row].image, imageSize: meme[indexPath.row].size)
             return cell
         }
     }
